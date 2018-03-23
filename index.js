@@ -113,7 +113,7 @@ function fetch_goodreads_review(bookName, callback) {
                         dataToSend += '<br />You can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].isbn[0];
                     else if (result.GoodreadsResponse.book[0].kindle_asin[0] != undefined || result.GoodreadsResponse.book[0].kindle_asin[0] != '')
                         dataToSend += '<br />You can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].kindle_asin[0];
-                    dataToSend += "<br />Here's the brief about the book for you";
+                    dataToSend += "<br /><br />Here's the brief about the book for you";
                     dataToSend += "<br />" + result.GoodreadsResponse.book[0].description[0];
                     dataToSend += '<br /><br />Happy Reading :)';
                     callback(dataToSend);
