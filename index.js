@@ -48,7 +48,7 @@ function fetch_book_details(bookType, callback) {
                         dataToSend = "I didn't find any genres like " + bookType;
                     } else {
                         for (var i = 0; i <= 4; i++) {
-                            dataToSend += "\n" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author;
+                            dataToSend += "<br />" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author;
                         }
                     }
                     callback(dataToSend);
@@ -83,9 +83,9 @@ function fetch_book_details(bookType, callback) {
 //                 });
 //             } else {
 //                 dataToSend = "Below is the summmary for " + book_info.results[0].book_title + ' wriiten by ' + book_info.results[0].book_author + " and reviewed by " + book_info.results[0].byline;
-//                 dataToSend += "\n" + book_info.results[0].summary;
-//                 dataToSend += "\n\nFor more please click on the below link:";
-//                 dataToSend += "\n" + book_info.results[0].url;
+//                 dataToSend += "<br />" + book_info.results[0].summary;
+//                 dataToSend += "<br /><br />For more please click on the below link:";
+//                 dataToSend += "<br />" + book_info.results[0].url;
 //                 callback(dataToSend);
 //             }
 //         })
@@ -107,21 +107,22 @@ function fetch_goodreads_review(bookName, callback) {
                 parser.parseString(json_data, function (err, result) {
                     // Details from Goodreads
                     dataToSend = 'Great! Here are the details you requested';
-                    dataToSend += '\nBook Name: ' + result.GoodreadsResponse.book[0].title[0] + ' written by ' + result.GoodreadsResponse.book[0].authors[0].author[0].name[0];
-                    dataToSend += '\nAverage rating for this book is ' + result.GoodreadsResponse.book[0].average_rating[0] + ' by ' + result.GoodreadsResponse.book[0].ratings_count[0] + ' users in goodreads.com';
+                    dataToSend += '<br />Book Name: ' + result.GoodreadsResponse.book[0].title[0] + ' written by ' + result.GoodreadsResponse.book[0].authors[0].author[0].name[0];
+                    dataToSend += '<br />Average rating for this book is ' + result.GoodreadsResponse.book[0].average_rating[0] + ' by ' + result.GoodreadsResponse.book[0].ratings_count[0] + ' users in goodreads.com';
                     if (result.GoodreadsResponse.book[0].isbn[0] != undefined || result.GoodreadsResponse.book[0].isbn[0] != '')
-                        dataToSend += '\nYou can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].isbn[0];
+                        dataToSend += '<br />You can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].isbn[0];
                     else if (result.GoodreadsResponse.book[0].kindle_asin[0] != undefined || result.GoodreadsResponse.book[0].kindle_asin[0] != '')
-                        dataToSend += '\nYou can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].kindle_asin[0];
-                    dataToSend += "\nHere's the brief about the book for you";
-                    dataToSend += "\n" + result.GoodreadsResponse.book[0].description[0];
-                    dataToSend += '\n\nHappy Reading :)';
+                        dataToSend += '<br />You can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].kindle_asin[0];
+                    dataToSend += "<br />Here's the brief about the book for you";
+                    dataToSend += "<br />" + result.GoodreadsResponse.book[0].description[0];
+                    dataToSend += '<br /><br />Happy Reading :)';
+                    dataToSend += '<input type="submit" name="test" value="'+ result.GoodreadsResponse.book[0].title[0] +'"';
                     callback(dataToSend);
                 });
             });
         }
         else {
-            dataToSend = 'Sorry! No books found in goodreads.com for you';
+            dataToSend = 'Sorry! No book found in goodreads.com';
             callback(dataToSend);
         }
     });
@@ -139,19 +140,19 @@ function fetch_author_details(authorName, callback) {
                 json_data = json_data.toString().replace("\ufeff", "");
                 parser.parseString(json_data, function (err, result) {
                     // Details from Goodreads
-                    dataToSend = 'Work by ' + authorName + ' is as below';
+                    dataToSend = 'Work by ' + authorName + ' ';
                     for (var i = 0; i < result.GoodreadsResponse.search[0].results[0].work.length; i++) {
                         var author_web = result.GoodreadsResponse.search[0].results[0].work[i].best_book[0].author[0].name[0];
                         author_web = author_web.replace(/[^a-zA-Z0-9]/g, '');
                         var author_input = authorName.replace(/[^a-zA-Z0-9]/g, '');
                         if (author_input.toLowerCase().indexOf(author_web.toLowerCase()) > -1) {
-                            dataToSend += '\n' + (inc + 1) + '. ' + result.GoodreadsResponse.search[0].results[0].work[i].best_book[0].title[0];
+                            dataToSend += '<br />' + (inc + 1) + '. ' + result.GoodreadsResponse.search[0].results[0].work[i].best_book[0].title[0];
                             dataToSend += ', with average rating of ' + result.GoodreadsResponse.search[0].results[0].work[i].average_rating[0];
                             inc += 1;
                         }
                     }
                     if (inc == 0) {
-                        dataToSend = 'Sorry! No books found in goodreads.com for you.';
+                        dataToSend = 'Sorry! No books found in goodreads.com';
                         callback(dataToSend);
                     } else {
                         callback(dataToSend);
