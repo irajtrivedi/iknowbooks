@@ -44,9 +44,9 @@ function fetch_book_details(bookType, callback) {
                     else
                         flag = undefined;
 
-                    if(flag === undefined){
+                    if (flag === undefined) {
                         dataToSend = "I didn't find any genres like " + bookType;
-                    }else {
+                    } else {
                         for (var i = 0; i <= 4; i++) {
                             dataToSend += "\n" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author;
                         }
@@ -106,19 +106,23 @@ function fetch_goodreads_review(bookName, callback) {
                 json_data = json_data.toString().replace("\ufeff", "");
                 parser.parseString(json_data, function (err, result) {
                     // Details from Goodreads
-                    dataToSend = 'Great! Here are the details your requested';
+                    dataToSend = 'Great! Here are the details you requested';
                     dataToSend += '\nBook Name: ' + result.GoodreadsResponse.book[0].title[0] + ' written by ' + result.GoodreadsResponse.book[0].authors[0].author[0].name[0];
-                    dataToSend += '\nIt has average rating of ' + result.GoodreadsResponse.book[0].average_rating[0] + ' by ' + result.GoodreadsResponse.book[0].ratings_count[0] + ' users in goodreads.com';
+                    dataToSend += '\nAverage rating for this book is ' + result.GoodreadsResponse.book[0].average_rating[0] + ' by ' + result.GoodreadsResponse.book[0].ratings_count[0] + ' users in goodreads.com';
                     if (result.GoodreadsResponse.book[0].isbn[0] != undefined || result.GoodreadsResponse.book[0].isbn[0] != '')
                         dataToSend += '\nYou can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].isbn[0];
                     else if (result.GoodreadsResponse.book[0].kindle_asin[0] != undefined || result.GoodreadsResponse.book[0].kindle_asin[0] != '')
                         dataToSend += '\nYou can buy this book at: ' + 'https://www.amazon.in/dp/' + result.GoodreadsResponse.book[0].kindle_asin[0];
                     dataToSend += "\nHere's the brief about the book for you";
-                    dataToSend += result.GoodreadsResponse.book[0].description[0];
+                    dataToSend += "\n" + result.GoodreadsResponse.book[0].description[0];
                     dataToSend += '\n\nHappy Reading :)';
                     callback(dataToSend);
                 });
             });
+        }
+        else {
+            dataToSend = 'Sorry! No books found in goodreads.com for you';
+            callback(dataToSend);
         }
     });
 }
@@ -146,11 +150,10 @@ function fetch_author_details(authorName, callback) {
                             inc += 1;
                         }
                     }
-                    if (inc == 0)
-                    {
+                    if (inc == 0) {
                         dataToSend = 'Sorry! No books found in goodreads.com for you.';
                         callback(dataToSend);
-                    }else {
+                    } else {
                         callback(dataToSend);
                     }
                 });
