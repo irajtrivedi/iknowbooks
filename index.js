@@ -116,7 +116,6 @@ function fetch_goodreads_review(bookName, callback) {
                     dataToSend += "<br />Here's the brief about the book for you";
                     dataToSend += "<br />" + result.GoodreadsResponse.book[0].description[0];
                     dataToSend += '<br /><br />Happy Reading :)';
-                    dataToSend += '<input type="submit" name="test" value="'+ result.GoodreadsResponse.book[0].title[0] +'"';
                     callback(dataToSend);
                 });
             });
