@@ -106,7 +106,7 @@ function fetch_goodreads_review(bookName, callback) {
                 json_data = json_data.toString().replace("\ufeff", "");
                 parser.parseString(json_data, function (err, result) {
                     // Details from Goodreads
-                    dataToSend = 'Great! I found lot of details for the book you searched';
+                    dataToSend = 'Great! Here are the details your requested';
                     dataToSend += '\nBook Name: ' + result.GoodreadsResponse.book[0].title[0] + ' written by ' + result.GoodreadsResponse.book[0].authors[0].author[0].name[0];
                     dataToSend += '\nIt has average rating of ' + result.GoodreadsResponse.book[0].average_rating[0] + ' by ' + result.GoodreadsResponse.book[0].ratings_count[0] + ' users in goodreads.com';
                     if (result.GoodreadsResponse.book[0].isbn[0] != undefined || result.GoodreadsResponse.book[0].isbn[0] != '')
