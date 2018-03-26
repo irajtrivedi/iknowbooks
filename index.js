@@ -28,7 +28,7 @@ function fetch_book_details(bookType, callback) {
                     dataToSend = "Sorry! couldn't fetch books list";
                     callback(dataToSend);
                 } else {
-                    dataToSend = "Here's the list of Top 5 " + bookType.toUpperCase() + ' books for you:';
+                    dataToSend = "Here's the New York Times Best Sellers list " + bookType.toUpperCase() + ' for you:';
                     if (bookType.toLowerCase() == 'fiction')
                         flag = 0;
                     else if (bookType.toLowerCase() == 'non-fiction' || bookType.toLowerCase() == 'nonfiction')
