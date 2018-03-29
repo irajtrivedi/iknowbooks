@@ -48,8 +48,8 @@ function fetch_book_details(bookType, callback) {
                         dataToSend = "I didn't find any genres like " + bookType;
                     } else {
                         for (var i = 0; i <= 4; i++) {
-                            dataToSend += "<a href='#' onclick=bot.sendEvent('books_info_event')> <br />" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author + "</a>";
-                            // dataToSend += "<br />" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author;
+                            // dataToSend += "<a href='#' onclick=bot.sendEvent('books_info_event')> <br />" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author + "</a>";
+                            dataToSend += "<br />" + (i + 1) + ". " + book_info.results.lists[flag].books[i].title + ' by ' + book_info.results.lists[flag].books[i].author;
                         }
                     }
                     callback(dataToSend);
