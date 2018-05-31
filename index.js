@@ -10,7 +10,7 @@ const server = express();
 server.use(bodyParser.json());
 
 function fetch_book_details(bookType, callback) {
-    let path = book_host + '/svc/books/v3/lists/overview.json?api-key=7dfc493d35bd4c87aff6f67a60e24b8c';
+    let path = book_host + '/svc/books/v3/lists/overview.json?api-key=<YOUR_KEY_HERE>';
     let dataToSend = '';
     let book_info = '';
     let flag;
